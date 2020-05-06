@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://vibudh:vibudh@123@devconnectorcluster-tviyo.mongodb.net/DevConnectorDB?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://vibudh:vibudh@123@devconnectorcluster-tviyo.mongodb.net/DevConnectorDB?retryWrites=true&w=majority",
+  "jwtToken": "mySecretKey"
 }
