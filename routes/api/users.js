@@ -77,9 +77,9 @@ router.post(
   }
 );
 
-//@route    Get api/test
+//@route    Get api/users/test
 //@desc     Test route
 //@access   Public
-router.get('/', (req, res) => res.send('User routes'));
+router.get('/test', (req, res) => res.send('User routes'));
 
 module.exports = router;
