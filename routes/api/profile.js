@@ -8,6 +8,8 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
+const config = require('config');
+const request = require('request');
 
 //@route    Get api/profile/me
 //@desc     Get logged in user profile
@@ -39,7 +41,7 @@ router.post(
     auth,
     [
       check('status', 'Status is required').not().isEmpty(),
-      check('skills', 'Skills is required').not().isEmpty(),
+      check('skills', 'Skills are required').not().isEmpty(),
     ],
   ],
   async (req, res) => {
@@ -289,6 +291,35 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
   } catch (err) {
     console.log(err.message);
     return res.status(500).json('Server Error');
+  }
+});
+
+// @route    GET api/profile/github/:username
+// @desc     Get user repos from Github
+// @access   Public
+router.get('/github/:username', async (req, res) => {
+  try {
+    const options = {
+      uri: `https://api.github.com/users/${
+        req.params.username
+      }/repos?per_page=5&sort=created:asc&client_id=${config.get(
+        'githubClientID'
+      )}&client_secret=${config.get('githubClientSecret')}`,
+      method: 'Get',
+      headers: {
+        'user-agent': 'node.js',
+      },
+    };
+    request(options, (error, response, body) => {
+      if (error) console.error(error);
+      if (!response == 200) {
+        res.status(500).send('No Github profile found.');
+      }
+      res.json(JSON.parse(body));
+    });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(404).json({ msg: 'No Github profile found' });
   }
 });
 

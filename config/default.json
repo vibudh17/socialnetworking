@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://vibudh:vibudh@123@devconnectorcluster-tviyo.mongodb.net/DevConnectorDB?retryWrites=true&w=majority",
-  "jwtToken": "mySecretKey"
+  "jwtToken": "mySecretKey",
+  "githubClientID": "624a8edd3c6affc349ec",
+  "githubClientSecret": "0fac3444b61c8821a85dcced80a3c1d55d5222ec"
 }
